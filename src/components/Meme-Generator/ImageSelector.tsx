@@ -11,7 +11,13 @@ import image9 from "../../assets/image09.png"
 import React, { useRef } from "react"
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6"
 
-const images = [
+// Define the type for the props
+interface ImageSelectorProps {
+  onImageSelect: (image: string) => void
+}
+
+// Array of image imports
+const images: string[] = [
   image1,
   image2,
   image3,
@@ -24,8 +30,8 @@ const images = [
   image10,
 ]
 
-const ImageSelector = ({ onImageSelect }) => {
-  const carouselRef = useRef(null)
+const ImageSelector: React.FC<ImageSelectorProps> = ({ onImageSelect }) => {
+  const carouselRef = useRef<HTMLDivElement | null>(null)
 
   const handleNext = () => {
     if (carouselRef.current) {
@@ -41,7 +47,7 @@ const ImageSelector = ({ onImageSelect }) => {
     }
   }
 
-  const handleSelect = (image) => {
+  const handleSelect = (image: string) => {
     onImageSelect(image)
   }
 

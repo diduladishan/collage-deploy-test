@@ -2,7 +2,6 @@ import Hero from "../assets/hero.jpg"
 import "../components/homestyle.css"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
-import Collage from "./collage/collage"
 
 const HeroSection: React.FC = () => {
   return (

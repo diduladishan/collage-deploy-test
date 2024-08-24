@@ -1,11 +1,11 @@
 import MemeEditor from "../Meme-Generator/MemeEditor"
-import Navbar from "../NavBar/NavBar"
+// import Navbar from "../NavBar/NavBar"
 import React from "react"
 
 const Login: React.FC = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <MemeEditor />
     </div>
   )
