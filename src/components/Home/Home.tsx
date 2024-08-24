@@ -6,7 +6,7 @@ import React from "react"
 import { Toaster } from "react-hot-toast"
 import { Provider } from "react-redux"
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <div>
       <Provider store={store}>
@@ -26,4 +26,5 @@ const Home = () => {
     </div>
   )
 }
+
 export default Home

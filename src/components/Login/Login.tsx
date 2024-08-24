@@ -2,7 +2,7 @@ import MemeEditor from "../Meme-Generator/MemeEditor"
 import Navbar from "../NavBar/NavBar"
 import React from "react"
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <div>
       <Navbar />
