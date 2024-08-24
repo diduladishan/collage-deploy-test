@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
+    "@types/react-color": "^3.0.12",
     "axios": "^1.7.4",
     "clsx": "^2.1.1",
     "fabric": "^6.0.0-beta20",
