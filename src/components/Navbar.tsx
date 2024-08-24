@@ -1,8 +1,11 @@
 import logo from "../assets/memelogonav.png"
 import { navItems } from "../constants1"
+import { NavItem } from "../types"
 import Signin from "./Signin/Signin"
 import { Menu, X } from "lucide-react"
 import React, { useState } from "react"
+
+// Adjust the import path as needed
 
 const Navbar: React.FC = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false)
@@ -21,7 +24,7 @@ const Navbar: React.FC = () => {
             <span className="text-xl tracking-tight">MEME_Generate</span>
           </div>
           <ul className="ml-14 hidden space-x-12 lg:flex">
-            {navItems.map((item, index) => (
+            {navItems.map((item: NavItem, index: number) => (
               <li key={index}>
                 <a href={item.href}>{item.label}</a>
               </li>
@@ -50,7 +53,7 @@ const Navbar: React.FC = () => {
         {mobileDrawerOpen && (
           <div className="fixed right-0 z-20 flex w-full flex-col items-center justify-center bg-neutral-900 p-12 lg:hidden">
             <ul>
-              {navItems.map((item, index) => (
+              {navItems.map((item: NavItem, index: number) => (
                 <li key={index} className="py-4">
                   <a href={item.href}>{item.label}</a>
                 </li>

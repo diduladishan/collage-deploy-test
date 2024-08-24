@@ -309,7 +309,7 @@ const MemeEditor: React.FC = () => {
           <Collage />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
