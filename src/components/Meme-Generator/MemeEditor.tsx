@@ -7,12 +7,12 @@ import image5 from "../../assets/image05.png"
 import image6 from "../../assets/image06.png"
 import image7 from "../../assets/image07.png"
 import Navbar from "../Navbar"
-import Collage from "../collage/collage"
+// import Collage from "../collage/collage"
 import ColorPicker from "./ColorPicker"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
-import ImageSelector from "./ImageSelector"
-import TextEditor from "./TextEditor"
+// import ImageSelector from "./ImageSelector"
+// import TextEditor from "./TextEditor"
 import "./memeEditor.css"
 import html2canvas from "html2canvas"
 import React, { useState, useRef, useEffect } from "react"
@@ -27,8 +27,8 @@ interface Text {
   color: string
   fontStyle: "normal" | "italic"
   fontSize: number
-  fontWeight: "normal" | "bold"
-  textDecoration: "none" | "underline"
+  // fontWeight: "normal" | "bold"
+  // textDecoration: "none" | "underline"
 }
 
 const images = [image1, image2, image3, image4, image5, image6, image7, image8]
@@ -79,42 +79,42 @@ const MemeEditor: React.FC = () => {
     setTexts(newTexts)
   }
 
-  const handleToggleBold = () => {
-    const newTexts = texts.map((text) =>
-      text.id === selectedTextId
-        ? {
-            ...text,
-            fontWeight: text.fontWeight === "bold" ? "normal" : "bold",
-          }
-        : text,
-    )
-    setTexts(newTexts)
-  }
+  // const handleToggleBold = () => {
+  //   const newTexts = texts.map((text) =>
+  //     text.id === selectedTextId
+  //       ? {
+  //           ...text,
+  //           fontWeight: text.fontWeight === "bold" ? "normal" : "bold",
+  //         }
+  //       : text,
+  //   )
+  //   setTexts(newTexts)
+  // }
 
-  const handleToggleItalic = () => {
-    const newTexts = texts.map((text) =>
-      text.id === selectedTextId
-        ? {
-            ...text,
-            fontStyle: text.fontStyle === "italic" ? "normal" : "italic",
-          }
-        : text,
-    )
-    setTexts(newTexts)
-  }
+  // const handleToggleItalic = () => {
+  //   const newTexts = texts.map((text) =>
+  //     text.id === selectedTextId
+  //       ? {
+  //           ...text,
+  //           fontStyle: text.fontStyle === "italic" ? "normal" : "italic",
+  //         }
+  //       : text,
+  //   )
+  //   setTexts(newTexts)
+  // }
 
-  const handleToggleUnderline = () => {
-    const newTexts = texts.map((text) =>
-      text.id === selectedTextId
-        ? {
-            ...text,
-            textDecoration:
-              text.textDecoration === "underline" ? "none" : "underline",
-          }
-        : text,
-    )
-    setTexts(newTexts)
-  }
+  // const handleToggleUnderline = () => {
+  //   const newTexts = texts.map((text) =>
+  //     text.id === selectedTextId
+  //       ? {
+  //           ...text,
+  //           textDecoration:
+  //             text.textDecoration === "underline" ? "none" : "underline",
+  //         }
+  //       : text,
+  //   )
+  //   setTexts(newTexts)
+  // }
 
   const handleAddText = () => {
     if (texts.length < 4) {
@@ -133,8 +133,8 @@ const MemeEditor: React.FC = () => {
           color: currentColor,
           fontStyle: "normal",
           fontSize: 24,
-          fontWeight: "normal",
-          textDecoration: "none",
+          // fontWeight: "normal",
+          // textDecoration: "none",
         },
       ])
       setSelectedTextId(newId)
@@ -185,14 +185,14 @@ const MemeEditor: React.FC = () => {
             {selectedImage && selectedTextId !== null && (
               <div className="w-full">
                 <div className="border-b border-[#535353] px-4 py-3">
-                  <TextEditor
+                  {/* <TextEditor
                     text={
                       texts.find((text) => text.id === selectedTextId) || {
                         text: "",
                         fontWeight: "normal",
                         fontStyle: "normal",
                         textDecoration: "none",
-                        fontSize: 24,
+                        // fontSize: 24,
                       }
                     }
                     onTextChange={handleTextChange}
@@ -202,7 +202,7 @@ const MemeEditor: React.FC = () => {
                     onToggleItalic={handleToggleItalic}
                     onToggleUnderline={handleToggleUnderline}
                     isAddDisabled={texts.length >= 4}
-                  />
+                  /> */}
                 </div>
 
                 <div className="border-b border-[#535353] px-4 py-3">
@@ -296,9 +296,9 @@ const MemeEditor: React.FC = () => {
                   style={{
                     color: text.color,
                     fontSize: text.fontSize,
-                    fontWeight: text.fontWeight,
+                    // fontWeight: text.fontWeight,
                     fontStyle: text.fontStyle,
-                    textDecoration: text.textDecoration,
+                    // textDecoration: text.textDecoration,
                     position: "absolute",
                     left: text.x,
                     top: text.y,
