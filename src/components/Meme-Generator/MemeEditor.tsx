@@ -6,7 +6,6 @@ import image4 from "../../assets/image04.png"
 import image5 from "../../assets/image05.png"
 import image6 from "../../assets/image06.png"
 import image7 from "../../assets/image07.png"
-// import Footer from "../Footer"
 import Navbar from "../Navbar"
 import Collage from "../collage/collage"
 import ColorPicker from "./ColorPicker"
@@ -26,7 +25,7 @@ interface Text {
   x: number
   y: number
   color: string
-  fontStyle: string
+  fontStyle: "normal" | "italic"
   fontSize: number
   fontWeight: "normal" | "bold"
   textDecoration: "none" | "underline"
@@ -65,7 +64,7 @@ const MemeEditor: React.FC = () => {
   const handleFontChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newTexts = texts.map((text) =>
       text.id === selectedTextId
-        ? { ...text, fontStyle: e.target.value }
+        ? { ...text, fontStyle: e.target.value as "normal" | "italic" }
         : text,
     )
     setTexts(newTexts)
@@ -132,7 +131,7 @@ const MemeEditor: React.FC = () => {
           x: 100,
           y: newY,
           color: currentColor,
-          fontStyle: "Roboto",
+          fontStyle: "normal",
           fontSize: 24,
           fontWeight: "normal",
           textDecoration: "none",
@@ -175,7 +174,6 @@ const MemeEditor: React.FC = () => {
 
   const handleImageSelect = (image: string) => {
     setSelectedImage(image)
-    // No need to hide the image selector
   }
 
   return (
@@ -188,7 +186,15 @@ const MemeEditor: React.FC = () => {
               <div className="w-full">
                 <div className="border-b border-[#535353] px-4 py-3">
                   <TextEditor
-                    text={texts.find((text) => text.id === selectedTextId)}
+                    text={
+                      texts.find((text) => text.id === selectedTextId) || {
+                        text: "",
+                        fontWeight: "normal",
+                        fontStyle: "normal",
+                        textDecoration: "none",
+                        fontSize: 24,
+                      }
+                    }
                     onTextChange={handleTextChange}
                     onAddText={handleAddText}
                     onDeleteText={handleDeleteText}
@@ -210,7 +216,7 @@ const MemeEditor: React.FC = () => {
                   <FontSelector
                     currentFont={
                       texts.find((text) => text.id === selectedTextId)
-                        ?.fontStyle
+                        ?.fontStyle || "normal"
                     }
                     onFontChange={handleFontChange}
                   />
@@ -219,7 +225,8 @@ const MemeEditor: React.FC = () => {
                 <div className="border-b border-[#535353] px-4 py-3">
                   <FontSizeSelector
                     currentSize={
-                      texts.find((text) => text.id === selectedTextId)?.fontSize
+                      texts.find((text) => text.id === selectedTextId)
+                        ?.fontSize || 24
                     }
                     onSizeChange={handleFontSizeChange}
                   />
@@ -252,34 +259,37 @@ const MemeEditor: React.FC = () => {
           </div>
         </div>
 
-        <div className="middle-section flex justify-center border-x border-[#535353]">
-          <div
-            className="relative max-w-[100%] px-4 py-4"
-            ref={memeRef}
-            style={{ position: "relative", width: "100%", overflow: "hidden" }}
-          >
-            {selectedImage ? (
+        <div className="left-section">
+          <div className="flex flex-wrap gap-2 p-2">
+            {images.map((img, index) => (
               <img
-                src={selectedImage}
-                alt="Meme"
-                className="max-w-[100%] object-contain"
-                style={{ maxHeight: "80vh" }}
+                key={index}
+                src={img}
+                alt={`Template ${index + 1}`}
+                className="h-24 w-24 cursor-pointer object-cover"
+                onClick={() => handleImageSelect(img)}
               />
-            ) : (
-              <ImageSelector onSelectImage={handleImageSelect} />
-            )}
+            ))}
+          </div>
+        </div>
+
+        {selectedImage && (
+          <div className="meme-container" ref={memeRef}>
+            <img
+              src={selectedImage}
+              alt="Selected Template"
+              className="meme-image"
+            />
             {texts.map((text) => (
               <Draggable
                 key={text.id}
-                bounds="parent"
-                defaultPosition={{ x: text.x, y: text.y }}
-                onStop={(_, { x, y }) => {
+                position={{ x: text.x, y: text.y }}
+                onStop={(e, data) => {
                   const newTexts = texts.map((t) =>
-                    t.id === text.id ? { ...t, x, y } : t,
+                    t.id === text.id ? { ...t, x: data.x, y: data.y } : t,
                   )
                   setTexts(newTexts)
                 }}
-                onMouseDown={() => handleSelectText(text.id)}
               >
                 <div
                   id={`text-${text.id}`}
@@ -287,29 +297,23 @@ const MemeEditor: React.FC = () => {
                     color: text.color,
                     fontSize: text.fontSize,
                     fontWeight: text.fontWeight,
+                    fontStyle: text.fontStyle,
                     textDecoration: text.textDecoration,
-                    fontFamily: text.fontStyle,
-                    border:
-                      selectedTextId === text.id ? "2px dotted #000" : "none",
                     position: "absolute",
                     left: text.x,
                     top: text.y,
+                    whiteSpace: "pre-wrap",
                     cursor: "pointer",
-                    backgroundColor: "transparent",
                   }}
+                  onClick={() => handleSelectText(text.id)}
                 >
                   {text.text}
                 </div>
               </Draggable>
             ))}
           </div>
-        </div>
-
-        <div className="left-section border-b border-[#535353] bg-[#191919]">
-          <Collage />
-        </div>
+        )}
       </div>
-      {/* <Footer /> */}
     </div>
   )
 }
