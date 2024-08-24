@@ -1,0 +1,19 @@
+@media (min-width: 641px) {
+  .container123 {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    height: 100vh; /* Adjust height as needed */
+  }
+}
+
+.left-section {
+  background-color: #191919; /* Example background color */
+}
+
+.middle-section {
+  background-color: #191919; /* Example background color */
+}
+
+.right-section {
+  background-color: #191919; /* Example background color */
+}
